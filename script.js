@@ -3,12 +3,14 @@ const totalDays = 100;
 let completedDays = JSON.parse(localStorage.getItem('naveenLicTracker')) || [];
 
 // ==================== TAB LOGIC ====================
-function switchTab(tabId) {
+function switchTab(event, tabId) {
+    // Hide all tabs and remove active states from buttons
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     
+    // Show the clicked tab and highlight the button
     document.getElementById(`tab-${tabId}`).classList.add('active');
-    event.target.classList.add('active');
+    event.currentTarget.classList.add('active');
 }
 
 // ==================== TIMER LOGIC ====================
@@ -29,6 +31,7 @@ function startTimer(minutes) {
         time--;
     }, 1000);
 }
+
 function stopTimer() {
     clearInterval(timerInterval);
     document.getElementById('timer-display').innerText = "00:00";
@@ -36,12 +39,14 @@ function stopTimer() {
 
 // ==================== MISTAKE LOG LOGIC ====================
 const mistakeBox = document.getElementById('mistake-textarea');
-mistakeBox.value = localStorage.getItem('naveenMistakes') || '';
-mistakeBox.addEventListener('input', (e) => {
-    localStorage.setItem('naveenMistakes', e.target.value);
-});
+if(mistakeBox) {
+    mistakeBox.value = localStorage.getItem('naveenMistakes') || '';
+    mistakeBox.addEventListener('input', (e) => {
+        localStorage.setItem('naveenMistakes', e.target.value);
+    });
+}
 
-// ==================== RESOURCE LINKS (Real Links based on search) ====================
+// ==================== RESOURCE LINKS ====================
 const mockLinks = [
     { name: "Examsnet Previous Papers", desc: "10+ Real LIC AAO papers (2013-2023) completely free.", url: "https://www.examsnet.com/exams/licaao-model-previous-papers-online" },
     { name: "EduJha Free Mock", desc: "LIC AAO 2026 Free Mock Test & Practice Set.", url: "https://www.edujha.com/mock-tests/category/lic-aao" },
@@ -60,6 +65,8 @@ function renderResources() {
     const mockContainer = document.getElementById('mock-links');
     const studyContainer = document.getElementById('study-links');
     
+    if(!mockContainer || !studyContainer) return;
+
     mockLinks.forEach(link => {
         mockContainer.innerHTML += `<a href="${link.url}" target="_blank" class="resource-card"><strong>${link.name}</strong>${link.desc}</a>`;
     });
@@ -89,12 +96,18 @@ function toggleDay(day) {
         completedDays.push(day);
     }
     localStorage.setItem('naveenLicTracker', JSON.stringify(completedDays));
-    document.getElementById(`day-${day}`).classList.toggle('completed');
+    
+    const card = document.getElementById(`day-${day}`);
+    if (card) {
+        card.classList.toggle('completed');
+    }
     updateProgress();
 }
 
 function renderTimeline() {
     const container = document.getElementById('timeline-container');
+    if(!container) return;
+
     for (let i = 1; i <= totalDays; i++) {
         const data = generateSyllabus(i);
         const isChecked = completedDays.includes(i) ? 'checked' : '';

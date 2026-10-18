@@ -1,6 +1,6 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
 body { background-color: #f4f6f8; color: #333; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; margin-left: 280px; } /* Shifted for timer */
+.container { max-width: 900px; margin: 0 auto; padding: 20px; margin-left: 280px; } 
 
 /* Floating Timer */
 .floating-timer {
@@ -18,7 +18,7 @@ h1 { font-size: 24px; margin-bottom: 20px; }
 
 /* Tabs */
 .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
-.tab-btn { background: rgba(255,255,255,0.1); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; transition: 0.3s; }
+.tab-btn { background: rgba(255,255,255,0.2); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; transition: 0.3s; }
 .tab-btn.active, .tab-btn:hover { background: #ffcc00; color: #0b3d91; font-weight: bold; }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
@@ -38,7 +38,7 @@ input[type="checkbox"] { width: 24px; height: 24px; cursor: pointer; }
 
 /* Grid & Layouts */
 .task-grid, .resource-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
-.task-box { background: #white; border: 1px solid #ddd; padding: 15px; border-radius: 6px; line-height: 1.6;}
+.task-box { background: white; border: 1px solid #ddd; padding: 15px; border-radius: 6px; line-height: 1.6;}
 .task-box h3 { margin-bottom: 10px; color: #0b3d91; border-bottom: 2px solid #ffcc00; display: inline-block;}
 .task-box ul { padding-left: 20px; }
 
